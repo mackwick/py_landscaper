@@ -13,8 +13,6 @@ tools = [
         {"name": "underpaid team", "cost": 500, "income": 250}
 ]
 
-# print(tools[player["tool"]]["name"])
-
 ## Functions
 
 def get_input():
@@ -33,9 +31,11 @@ def get_input():
                 get_input()
 
 def cut_lawns():
-        print(f"You just earned ")
-        # When player savings >= the cost of the tool at the current index +1, they can choose to buy a tool or keep cutting lawns
-        # check win
+        print(f"You earned ${tools[player['tool']]['income']} cutting lawns with your {tools[player['tool']]['name']} today.")
+        player["savings"] += tools[player['tool']]['income']
+        win_conditions()
+
+        
 
 def buy_tool():
         print("buying a tool") 
@@ -48,6 +48,11 @@ def buy_tool():
         ## check win
 
 def win_conditions():
-        pass ## Win conditions: a team of students and $1000 (let user know they win) -- won game will equal True and we celebrate, if not cut_lawns
+        if (player["savings"] >= 1000 and player["tool"] == 4):
+                print(f"Congratulations! You have ${player['savings']} and a {tools[player['tool']]['name']}. You're a vital part of the broken capitalist system. You win!")
+        else:
+                print(f"You have saved ${player['savings']}. Nice job. Get some rest so you can work more tomorrow!")
+                get_input()
+
 
 get_input()
